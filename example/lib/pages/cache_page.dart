@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:better_player_plus/better_player_plus.dart';
 import 'package:example/constants.dart';
 import 'package:flutter/material.dart';
@@ -19,7 +21,8 @@ class _CachePageState extends State<CachePage> {
     );
     _betterPlayerDataSource = BetterPlayerDataSource(
       BetterPlayerDataSourceType.network,
-      Constants.phantomVideoUrl,
+      DashExample.backToTwentyEp8,
+      videoFormat: BetterPlayerVideoFormat.dash,
       cacheConfiguration: BetterPlayerCacheConfiguration(
         useCache: true,
         preCacheSize: 10 * 1024 * 1024,
@@ -31,6 +34,8 @@ class _CachePageState extends State<CachePage> {
       ),
     );
     _betterPlayerController = BetterPlayerController(betterPlayerConfiguration);
+    // _betterPlayerController.preCache(_betterPlayerDataSource);
+    // _betterPlayerController.setupDataSource(_betterPlayerDataSource);
     super.initState();
   }
 
@@ -71,8 +76,9 @@ class _CachePageState extends State<CachePage> {
           ),
           TextButton(
             child: Text("Play video"),
-            onPressed: () {
-              _betterPlayerController.setupDataSource(_betterPlayerDataSource);
+            onPressed: () async {
+              await _betterPlayerController.setupDataSource(_betterPlayerDataSource);
+              log('hasCurrentDataSourceStarted: ${_betterPlayerController.isVideoInitialized()}');
             },
           ),
           TextButton(

@@ -141,6 +141,8 @@ internal class BetterPlayer(
         val uri = Uri.parse(dataSource)
         var dataSourceFactory: DataSource.Factory?
         val userAgent = getUserAgent(headers)
+
+        //=> Drm Configuration
         if (!licenseUrl.isNullOrEmpty()) {
             val httpMediaDrmCallback =
                 HttpMediaDrmCallback(licenseUrl, DefaultHttpDataSource.Factory())
@@ -186,6 +188,7 @@ internal class BetterPlayer(
         } else {
             drmSessionManager = null
         }
+
         if (isHTTP(uri)) {
             dataSourceFactory = getDataSourceFactory(userAgent, headers)
             if (useCache && maxCacheSize > 0 && maxCacheFileSize > 0) {

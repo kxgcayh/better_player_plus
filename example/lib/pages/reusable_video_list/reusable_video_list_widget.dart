@@ -69,16 +69,16 @@ class _ReusableVideoListWidgetState extends State<ReusableVideoListWidget> {
       _initialized = true;
       return;
     }
-    // if (controller != null && _initialized) {
-    //   controller!.removeEventsListener(onPlayerEvent);
-    //   widget.videoListController!.freeBetterPlayerController(controller);
-    //   controller!.pause();
-    //   controller = null;
-    //   if (!betterPlayerControllerStreamController.isClosed) {
-    //     betterPlayerControllerStreamController.add(null);
-    //   }
-    //   _initialized = false;
-    // }
+    if (controller != null && _initialized) {
+      controller!.removeEventsListener(onPlayerEvent);
+      widget.videoListController!.freeBetterPlayerController(controller);
+      controller!.pause();
+      controller = null;
+      if (!betterPlayerControllerStreamController.isClosed) {
+        betterPlayerControllerStreamController.add(null);
+      }
+      _initialized = false;
+    }
   }
 
   void onPlayerEvent(BetterPlayerEvent event) {

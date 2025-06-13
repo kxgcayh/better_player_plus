@@ -19,12 +19,10 @@ class BetterPlayerSubtitlesDrawer extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  _BetterPlayerSubtitlesDrawerState createState() =>
-      _BetterPlayerSubtitlesDrawerState();
+  _BetterPlayerSubtitlesDrawerState createState() => _BetterPlayerSubtitlesDrawerState();
 }
 
-class _BetterPlayerSubtitlesDrawerState
-    extends State<BetterPlayerSubtitlesDrawer> {
+class _BetterPlayerSubtitlesDrawerState extends State<BetterPlayerSubtitlesDrawer> {
   final RegExp htmlRegExp =
       // ignore: unnecessary_raw_strings
       RegExp(r"<[^>]*>", multiLine: true);
@@ -40,8 +38,7 @@ class _BetterPlayerSubtitlesDrawerState
 
   @override
   void initState() {
-    _visibilityStreamSubscription =
-        widget.playerVisibilityStream.listen((state) {
+    _visibilityStreamSubscription = widget.playerVisibilityStream.listen((state) {
       setState(() {
         _playerVisible = state;
       });
@@ -53,8 +50,7 @@ class _BetterPlayerSubtitlesDrawerState
       _configuration = setupDefaultConfiguration();
     }
 
-    widget.betterPlayerController.videoPlayerController!
-        .addListener(_updateState);
+    widget.betterPlayerController.videoPlayerController!.addListener(_updateState);
 
     _outerTextStyle = TextStyle(
         fontSize: _configuration!.fontSize,
@@ -65,17 +61,14 @@ class _BetterPlayerSubtitlesDrawerState
           ..color = _configuration!.outlineColor);
 
     _innerTextStyle = TextStyle(
-        fontFamily: _configuration!.fontFamily,
-        color: _configuration!.fontColor,
-        fontSize: _configuration!.fontSize);
+        fontFamily: _configuration!.fontFamily, color: _configuration!.fontColor, fontSize: _configuration!.fontSize);
 
     super.initState();
   }
 
   @override
   void dispose() {
-    widget.betterPlayerController.videoPlayerController!
-        .removeListener(_updateState);
+    widget.betterPlayerController.videoPlayerController!.removeListener(_updateState);
     _visibilityStreamSubscription.cancel();
     super.dispose();
   }
@@ -84,8 +77,7 @@ class _BetterPlayerSubtitlesDrawerState
   void _updateState() {
     if (mounted) {
       setState(() {
-        _latestValue =
-            widget.betterPlayerController.videoPlayerController!.value;
+        _latestValue = widget.betterPlayerController.videoPlayerController!.value;
       });
     }
   }
@@ -95,17 +87,14 @@ class _BetterPlayerSubtitlesDrawerState
     final BetterPlayerSubtitle? subtitle = _getSubtitleAtCurrentPosition();
     widget.betterPlayerController.renderedSubtitle = subtitle;
     final List<String> subtitles = subtitle?.texts ?? [];
-    final List<Widget> textWidgets =
-        subtitles.map((text) => _buildSubtitleTextWidget(text)).toList();
+    final List<Widget> textWidgets = subtitles.map((text) => _buildSubtitleTextWidget(text)).toList();
 
     return Container(
       height: double.infinity,
       width: double.infinity,
       child: Padding(
         padding: EdgeInsets.only(
-            bottom: _playerVisible
-                ? _configuration!.bottomPadding + 30
-                : _configuration!.bottomPadding,
+            bottom: _playerVisible ? _configuration!.bottomPadding + 30 : _configuration!.bottomPadding,
             left: _configuration!.leftPadding,
             right: _configuration!.rightPadding),
         child: Column(
@@ -122,8 +111,7 @@ class _BetterPlayerSubtitlesDrawerState
     }
 
     final Duration position = _latestValue!.position;
-    for (final BetterPlayerSubtitle subtitle
-        in widget.betterPlayerController.subtitlesLines) {
+    for (final BetterPlayerSubtitle subtitle in widget.betterPlayerController.subtitlesLines) {
       if (subtitle.start! <= position && subtitle.end! >= position) {
         return subtitle;
       }
@@ -147,10 +135,7 @@ class _BetterPlayerSubtitlesDrawerState
       color: _configuration!.backgroundColor,
       child: Stack(
         children: [
-          if (_configuration!.outlineEnabled)
-            _buildHtmlWidget(subtitleText, _outerTextStyle)
-          else
-            const SizedBox(),
+          if (_configuration!.outlineEnabled) _buildHtmlWidget(subtitleText, _outerTextStyle) else const SizedBox(),
           _buildHtmlWidget(subtitleText, _innerTextStyle)
         ],
       ),
@@ -158,10 +143,12 @@ class _BetterPlayerSubtitlesDrawerState
   }
 
   Widget _buildHtmlWidget(String text, TextStyle textStyle) {
-    return HtmlWidget(
-      text,
-      textStyle: textStyle,
-    );
+    // TODO: Make html widget possible to align center!
+    return Text(text, style: textStyle, textAlign: TextAlign.center);
+    // return HtmlWidget(
+    //   text,
+    //   textStyle: textStyle,
+    // );
   }
 
   BetterPlayerSubtitlesConfiguration setupDefaultConfiguration() {

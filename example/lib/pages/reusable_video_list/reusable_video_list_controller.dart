@@ -5,19 +5,21 @@ class ReusableVideoListController {
   final List<BetterPlayerController> _betterPlayerControllerRegistry = [];
   final List<BetterPlayerController> _usedBetterPlayerControllerRegistry = [];
 
-  ReusableVideoListController() {
-    for (int index = 0; index < 8; index++) {
-      _betterPlayerControllerRegistry.add(
-        BetterPlayerController(
-          BetterPlayerConfiguration(handleLifecycle: false, autoDispose: false),
-        ),
+  ReusableVideoListController();
+
+  void register(int total) {
+    for (int index = 0; index < total; index++) {
+      final controller = BetterPlayerController(
+        BetterPlayerConfiguration(handleLifecycle: false, autoDispose: false),
       );
+      _betterPlayerControllerRegistry.add(controller);
     }
   }
 
   BetterPlayerController? getBetterPlayerController() {
-    final freeController = _betterPlayerControllerRegistry
-        .firstWhereOrNull((controller) => !_usedBetterPlayerControllerRegistry.contains(controller));
+    final freeController = _betterPlayerControllerRegistry.firstWhereOrNull((controller) {
+      return !_usedBetterPlayerControllerRegistry.contains(controller);
+    });
 
     if (freeController != null) {
       _usedBetterPlayerControllerRegistry.add(freeController);
@@ -31,8 +33,8 @@ class ReusableVideoListController {
   }
 
   void dispose() {
-    _betterPlayerControllerRegistry.forEach((controller) {
+    for (var controller in _betterPlayerControllerRegistry) {
       controller.dispose();
-    });
+    }
   }
 }

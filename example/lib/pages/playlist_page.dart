@@ -85,13 +85,13 @@ class _PlaylistPageState extends State<PlaylistPage> {
                     "finishes. User can't use player controls when video is changing."),
               ),
               AspectRatio(
+                aspectRatio: 1,
                 child: BetterPlayerPlaylist(
                   key: _betterPlayerPlaylistStateKey,
                   betterPlayerConfiguration: _betterPlayerConfiguration,
                   betterPlayerPlaylistConfiguration: _betterPlayerPlaylistConfiguration,
                   betterPlayerDataSourceList: snapshot.data!,
                 ),
-                aspectRatio: 1,
               ),
               ElevatedButton(
                 onPressed: () {
