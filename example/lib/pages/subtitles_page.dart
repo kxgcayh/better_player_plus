@@ -1,11 +1,14 @@
 import 'package:better_player_plus/better_player_plus.dart';
 import 'package:example/constants.dart';
 import 'package:example/utils.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 class SubtitlesPage extends StatefulWidget {
+  const SubtitlesPage({super.key});
+
   @override
-  _SubtitlesPageState createState() => _SubtitlesPageState();
+  State<SubtitlesPage> createState() => _SubtitlesPageState();
 }
 
 class _SubtitlesPageState extends State<SubtitlesPage> {
@@ -27,7 +30,9 @@ class _SubtitlesPageState extends State<SubtitlesPage> {
     _betterPlayerController = BetterPlayerController(betterPlayerConfiguration);
     _betterPlayerController.addEventsListener((event) {
       if (event.betterPlayerEventType == BetterPlayerEventType.progress) {
-        print("Current subtitle line: " + _betterPlayerController.renderedSubtitle.toString());
+        if (kDebugMode) {
+          print("Current subtitle line: " + _betterPlayerController.renderedSubtitle.toString());
+        }
       }
     });
     _setupDataSource();
@@ -37,10 +42,11 @@ class _SubtitlesPageState extends State<SubtitlesPage> {
   void _setupDataSource() async {
     BetterPlayerDataSource dataSource = BetterPlayerDataSource(
       BetterPlayerDataSourceType.network,
-      Constants.forBiggerBlazesUrl,
+      'https://m.cdn.miniseri.co.id/tong_ep2/dash/manifest.mpd',
+      videoFormat: BetterPlayerVideoFormat.dash,
       subtitles: BetterPlayerSubtitlesSource.single(
-        type: BetterPlayerSubtitlesSourceType.file,
-        url: await Utils.getFileUrl(Constants.fileExampleSubtitlesUrl),
+        type: BetterPlayerSubtitlesSourceType.network,
+        url: 'https://m.cdn.miniseri.co.id/subtitle/tong_2_en.srt',
         name: "My subtitles",
         selectedByDefault: true,
       ),

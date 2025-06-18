@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:better_player_plus/better_player_plus.dart';
 import 'package:example/constants.dart';
 import 'package:example/model/video_list_data.dart';
@@ -14,135 +16,87 @@ class PreloadQueuePage extends StatefulWidget {
 }
 
 class _PreloadQueuePageState extends State<PreloadQueuePage> {
-  ReusableVideoListController videoListController = ReusableVideoListController();
-  List<VideoListData> dataList = <VideoListData>[
-    VideoListData('Back to twenty ep1', DashExample.backToTwentyEp1, BetterPlayerVideoFormat.dash),
-    VideoListData('Back to twenty ep2', DashExample.backToTwentyEp2, BetterPlayerVideoFormat.dash),
-    VideoListData('Back to twenty ep3', DashExample.backToTwentyEp3, BetterPlayerVideoFormat.dash),
-    VideoListData('Back to twenty ep4', DashExample.backToTwentyEp4, BetterPlayerVideoFormat.dash),
-    VideoListData('Back to twenty ep5', DashExample.backToTwentyEp5, BetterPlayerVideoFormat.dash),
-    VideoListData('Back to twenty ep6', DashExample.backToTwentyEp6, BetterPlayerVideoFormat.dash),
-    VideoListData('Back to twenty ep7', DashExample.backToTwentyEp7, BetterPlayerVideoFormat.dash),
-    VideoListData('Back to twenty ep8', DashExample.backToTwentyEp8, BetterPlayerVideoFormat.dash),
-    VideoListData('Back to twenty ep1', DashExample.backToTwentyEp1, BetterPlayerVideoFormat.dash),
-    VideoListData('Back to twenty ep2', DashExample.backToTwentyEp2, BetterPlayerVideoFormat.dash),
-    VideoListData('Back to twenty ep3', DashExample.backToTwentyEp3, BetterPlayerVideoFormat.dash),
-    VideoListData('Back to twenty ep4', DashExample.backToTwentyEp4, BetterPlayerVideoFormat.dash),
-    VideoListData('Back to twenty ep5', DashExample.backToTwentyEp5, BetterPlayerVideoFormat.dash),
-    VideoListData('Back to twenty ep6', DashExample.backToTwentyEp6, BetterPlayerVideoFormat.dash),
-    VideoListData('Back to twenty ep7', DashExample.backToTwentyEp7, BetterPlayerVideoFormat.dash),
-    VideoListData('Back to twenty ep8', DashExample.backToTwentyEp8, BetterPlayerVideoFormat.dash),
-    VideoListData('Back to twenty ep1', DashExample.backToTwentyEp1, BetterPlayerVideoFormat.dash),
-    VideoListData('Back to twenty ep2', DashExample.backToTwentyEp2, BetterPlayerVideoFormat.dash),
-    VideoListData('Back to twenty ep3', DashExample.backToTwentyEp3, BetterPlayerVideoFormat.dash),
-    VideoListData('Back to twenty ep4', DashExample.backToTwentyEp4, BetterPlayerVideoFormat.dash),
-    VideoListData('Back to twenty ep5', DashExample.backToTwentyEp5, BetterPlayerVideoFormat.dash),
-    VideoListData('Back to twenty ep6', DashExample.backToTwentyEp6, BetterPlayerVideoFormat.dash),
-    VideoListData('Back to twenty ep7', DashExample.backToTwentyEp7, BetterPlayerVideoFormat.dash),
-    VideoListData('Back to twenty ep8', DashExample.backToTwentyEp8, BetterPlayerVideoFormat.dash),
-    VideoListData('Back to twenty ep1', DashExample.backToTwentyEp1, BetterPlayerVideoFormat.dash),
-    VideoListData('Back to twenty ep2', DashExample.backToTwentyEp2, BetterPlayerVideoFormat.dash),
-    VideoListData('Back to twenty ep3', DashExample.backToTwentyEp3, BetterPlayerVideoFormat.dash),
-    VideoListData('Back to twenty ep4', DashExample.backToTwentyEp4, BetterPlayerVideoFormat.dash),
-    VideoListData('Back to twenty ep5', DashExample.backToTwentyEp5, BetterPlayerVideoFormat.dash),
-    VideoListData('Back to twenty ep6', DashExample.backToTwentyEp6, BetterPlayerVideoFormat.dash),
-    VideoListData('Back to twenty ep7', DashExample.backToTwentyEp7, BetterPlayerVideoFormat.dash),
-    VideoListData('Back to twenty ep8', DashExample.backToTwentyEp8, BetterPlayerVideoFormat.dash),
-    VideoListData('Back to twenty ep1', DashExample.backToTwentyEp1, BetterPlayerVideoFormat.dash),
-    VideoListData('Back to twenty ep2', DashExample.backToTwentyEp2, BetterPlayerVideoFormat.dash),
-    VideoListData('Back to twenty ep3', DashExample.backToTwentyEp3, BetterPlayerVideoFormat.dash),
-    VideoListData('Back to twenty ep4', DashExample.backToTwentyEp4, BetterPlayerVideoFormat.dash),
-    VideoListData('Back to twenty ep5', DashExample.backToTwentyEp5, BetterPlayerVideoFormat.dash),
-    VideoListData('Back to twenty ep6', DashExample.backToTwentyEp6, BetterPlayerVideoFormat.dash),
-    VideoListData('Back to twenty ep7', DashExample.backToTwentyEp7, BetterPlayerVideoFormat.dash),
-    VideoListData('Back to twenty ep8', DashExample.backToTwentyEp8, BetterPlayerVideoFormat.dash),
-    VideoListData('Back to twenty ep1', DashExample.backToTwentyEp1, BetterPlayerVideoFormat.dash),
-    VideoListData('Back to twenty ep2', DashExample.backToTwentyEp2, BetterPlayerVideoFormat.dash),
-    VideoListData('Back to twenty ep3', DashExample.backToTwentyEp3, BetterPlayerVideoFormat.dash),
-    VideoListData('Back to twenty ep4', DashExample.backToTwentyEp4, BetterPlayerVideoFormat.dash),
-    VideoListData('Back to twenty ep5', DashExample.backToTwentyEp5, BetterPlayerVideoFormat.dash),
-    VideoListData('Back to twenty ep6', DashExample.backToTwentyEp6, BetterPlayerVideoFormat.dash),
-    VideoListData('Back to twenty ep7', DashExample.backToTwentyEp7, BetterPlayerVideoFormat.dash),
-    VideoListData('Back to twenty ep8', DashExample.backToTwentyEp8, BetterPlayerVideoFormat.dash),
-    VideoListData('Back to twenty ep1', DashExample.backToTwentyEp1, BetterPlayerVideoFormat.dash),
-    VideoListData('Back to twenty ep2', DashExample.backToTwentyEp2, BetterPlayerVideoFormat.dash),
-    VideoListData('Back to twenty ep3', DashExample.backToTwentyEp3, BetterPlayerVideoFormat.dash),
-    VideoListData('Back to twenty ep4', DashExample.backToTwentyEp4, BetterPlayerVideoFormat.dash),
-    VideoListData('Back to twenty ep5', DashExample.backToTwentyEp5, BetterPlayerVideoFormat.dash),
-    VideoListData('Back to twenty ep6', DashExample.backToTwentyEp6, BetterPlayerVideoFormat.dash),
-    VideoListData('Back to twenty ep7', DashExample.backToTwentyEp7, BetterPlayerVideoFormat.dash),
-    VideoListData('Back to twenty ep8', DashExample.backToTwentyEp8, BetterPlayerVideoFormat.dash),
-    VideoListData('Back to twenty ep1', DashExample.backToTwentyEp1, BetterPlayerVideoFormat.dash),
-    VideoListData('Back to twenty ep2', DashExample.backToTwentyEp2, BetterPlayerVideoFormat.dash),
-    VideoListData('Back to twenty ep3', DashExample.backToTwentyEp3, BetterPlayerVideoFormat.dash),
-    VideoListData('Back to twenty ep4', DashExample.backToTwentyEp4, BetterPlayerVideoFormat.dash),
-    VideoListData('Back to twenty ep5', DashExample.backToTwentyEp5, BetterPlayerVideoFormat.dash),
-    VideoListData('Back to twenty ep6', DashExample.backToTwentyEp6, BetterPlayerVideoFormat.dash),
-    VideoListData('Back to twenty ep7', DashExample.backToTwentyEp7, BetterPlayerVideoFormat.dash),
-    VideoListData('Back to twenty ep8', DashExample.backToTwentyEp8, BetterPlayerVideoFormat.dash),
-    VideoListData('Back to twenty ep1', DashExample.backToTwentyEp1, BetterPlayerVideoFormat.dash),
-    VideoListData('Back to twenty ep2', DashExample.backToTwentyEp2, BetterPlayerVideoFormat.dash),
-    VideoListData('Back to twenty ep3', DashExample.backToTwentyEp3, BetterPlayerVideoFormat.dash),
-    VideoListData('Back to twenty ep4', DashExample.backToTwentyEp4, BetterPlayerVideoFormat.dash),
-    VideoListData('Back to twenty ep5', DashExample.backToTwentyEp5, BetterPlayerVideoFormat.dash),
-    VideoListData('Back to twenty ep6', DashExample.backToTwentyEp6, BetterPlayerVideoFormat.dash),
-    VideoListData('Back to twenty ep7', DashExample.backToTwentyEp7, BetterPlayerVideoFormat.dash),
-    VideoListData('Back to twenty ep8', DashExample.backToTwentyEp8, BetterPlayerVideoFormat.dash),
-    VideoListData('Back to twenty ep1', DashExample.backToTwentyEp1, BetterPlayerVideoFormat.dash),
-    VideoListData('Back to twenty ep2', DashExample.backToTwentyEp2, BetterPlayerVideoFormat.dash),
-    VideoListData('Back to twenty ep3', DashExample.backToTwentyEp3, BetterPlayerVideoFormat.dash),
-    VideoListData('Back to twenty ep4', DashExample.backToTwentyEp4, BetterPlayerVideoFormat.dash),
-    VideoListData('Back to twenty ep5', DashExample.backToTwentyEp5, BetterPlayerVideoFormat.dash),
-    VideoListData('Back to twenty ep6', DashExample.backToTwentyEp6, BetterPlayerVideoFormat.dash),
-    VideoListData('Back to twenty ep7', DashExample.backToTwentyEp7, BetterPlayerVideoFormat.dash),
-    VideoListData('Back to twenty ep8', DashExample.backToTwentyEp8, BetterPlayerVideoFormat.dash),
-    VideoListData('Back to twenty ep1', DashExample.backToTwentyEp1, BetterPlayerVideoFormat.dash),
-    VideoListData('Back to twenty ep2', DashExample.backToTwentyEp2, BetterPlayerVideoFormat.dash),
-    VideoListData('Back to twenty ep3', DashExample.backToTwentyEp3, BetterPlayerVideoFormat.dash),
-    VideoListData('Back to twenty ep4', DashExample.backToTwentyEp4, BetterPlayerVideoFormat.dash),
-    VideoListData('Back to twenty ep5', DashExample.backToTwentyEp5, BetterPlayerVideoFormat.dash),
-    VideoListData('Back to twenty ep6', DashExample.backToTwentyEp6, BetterPlayerVideoFormat.dash),
-    VideoListData('Back to twenty ep7', DashExample.backToTwentyEp7, BetterPlayerVideoFormat.dash),
-    VideoListData('Back to twenty ep8', DashExample.backToTwentyEp8, BetterPlayerVideoFormat.dash),
-    VideoListData('Back to twenty ep1', DashExample.backToTwentyEp1, BetterPlayerVideoFormat.dash),
-    VideoListData('Back to twenty ep2', DashExample.backToTwentyEp2, BetterPlayerVideoFormat.dash),
-    VideoListData('Back to twenty ep3', DashExample.backToTwentyEp3, BetterPlayerVideoFormat.dash),
-    VideoListData('Back to twenty ep4', DashExample.backToTwentyEp4, BetterPlayerVideoFormat.dash),
-    VideoListData('Back to twenty ep5', DashExample.backToTwentyEp5, BetterPlayerVideoFormat.dash),
-    VideoListData('Back to twenty ep6', DashExample.backToTwentyEp6, BetterPlayerVideoFormat.dash),
-    VideoListData('Back to twenty ep7', DashExample.backToTwentyEp7, BetterPlayerVideoFormat.dash),
-    VideoListData('Back to twenty ep8', DashExample.backToTwentyEp8, BetterPlayerVideoFormat.dash),
+  final exampleVideos = [
+    "https://m.cdn.miniseri.co.id/ten_dates_ep1/hls/playlist.m3u8",
+    "https://m.cdn.miniseri.co.id/ten_dates_ep2/hls/playlist.m3u8",
+    "https://m.cdn.miniseri.co.id/ten_dates_ep3/hls/playlist.m3u8",
+    "https://m.cdn.miniseri.co.id/ten_dates_ep4/hls/playlist.m3u8",
+    "https://m.cdn.miniseri.co.id/ten_dates_ep5/hls/playlist.m3u8",
+    "https://m.cdn.miniseri.co.id/ten_dates_ep6/hls/playlist.m3u8",
+    "https://m.cdn.miniseri.co.id/ten_dates_ep7/hls/playlist.m3u8",
+    "https://m.cdn.miniseri.co.id/ten_dates_ep8/hls/playlist.m3u8",
+    "https://m.cdn.miniseri.co.id/ten_dates_ep9/hls/playlist.m3u8",
+    "https://m.cdn.miniseri.co.id/ten_dates_ep10/hls/playlist.m3u8"
+        "https://m.cdn.miniseri.co.id/ten_dates_ep1/hls/playlist.m3u8",
+    "https://m.cdn.miniseri.co.id/ten_dates_ep2/hls/playlist.m3u8",
+    "https://m.cdn.miniseri.co.id/ten_dates_ep3/hls/playlist.m3u8",
+    "https://m.cdn.miniseri.co.id/ten_dates_ep4/hls/playlist.m3u8",
+    "https://m.cdn.miniseri.co.id/ten_dates_ep5/hls/playlist.m3u8",
+    "https://m.cdn.miniseri.co.id/ten_dates_ep6/hls/playlist.m3u8",
+    "https://m.cdn.miniseri.co.id/ten_dates_ep7/hls/playlist.m3u8",
+    "https://m.cdn.miniseri.co.id/ten_dates_ep8/hls/playlist.m3u8",
+    "https://m.cdn.miniseri.co.id/ten_dates_ep9/hls/playlist.m3u8",
+    "https://m.cdn.miniseri.co.id/ten_dates_ep10/hls/playlist.m3u8"
+        "https://m.cdn.miniseri.co.id/ten_dates_ep1/hls/playlist.m3u8",
+    "https://m.cdn.miniseri.co.id/ten_dates_ep2/hls/playlist.m3u8",
+    "https://m.cdn.miniseri.co.id/ten_dates_ep3/hls/playlist.m3u8",
+    "https://m.cdn.miniseri.co.id/ten_dates_ep4/hls/playlist.m3u8",
+    "https://m.cdn.miniseri.co.id/ten_dates_ep5/hls/playlist.m3u8",
+    "https://m.cdn.miniseri.co.id/ten_dates_ep6/hls/playlist.m3u8",
+    "https://m.cdn.miniseri.co.id/ten_dates_ep7/hls/playlist.m3u8",
+    "https://m.cdn.miniseri.co.id/ten_dates_ep8/hls/playlist.m3u8",
+    "https://m.cdn.miniseri.co.id/ten_dates_ep9/hls/playlist.m3u8",
+    "https://m.cdn.miniseri.co.id/ten_dates_ep10/hls/playlist.m3u8"
+        "https://m.cdn.miniseri.co.id/ten_dates_ep1/hls/playlist.m3u8",
+    "https://m.cdn.miniseri.co.id/ten_dates_ep2/hls/playlist.m3u8",
+    "https://m.cdn.miniseri.co.id/ten_dates_ep3/hls/playlist.m3u8",
+    "https://m.cdn.miniseri.co.id/ten_dates_ep4/hls/playlist.m3u8",
+    "https://m.cdn.miniseri.co.id/ten_dates_ep5/hls/playlist.m3u8",
+    "https://m.cdn.miniseri.co.id/ten_dates_ep6/hls/playlist.m3u8",
+    "https://m.cdn.miniseri.co.id/ten_dates_ep7/hls/playlist.m3u8",
+    "https://m.cdn.miniseri.co.id/ten_dates_ep8/hls/playlist.m3u8",
+    "https://m.cdn.miniseri.co.id/ten_dates_ep9/hls/playlist.m3u8",
+    "https://m.cdn.miniseri.co.id/ten_dates_ep10/hls/playlist.m3u8"
   ];
+
+  late BetterPlayerPreloadController betterPlayerPreloadController;
 
   @override
   void initState() {
-    videoListController.register(dataList.length);
+    betterPlayerPreloadController = BetterPlayerPreloadController(
+      exampleVideos.map(
+        (url) {
+          return BetterPlayerDataSource(BetterPlayerDataSourceType.network, url,
+              videoFormat: BetterPlayerVideoFormat.hls, bufferingConfiguration: BetterPlayerBufferingConfiguration());
+        },
+      ).toList(),
+    );
     super.initState();
   }
 
   @override
   void dispose() {
-    videoListController.dispose();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // body: PageView.builder(
       body: PreloadPageView.builder(
         // controller: pageController,
-        itemCount: dataList.length,
-        preloadPagesCount: 3,
+        itemCount: betterPlayerPreloadController.betterPlayerControllers.length,
+        preloadPagesCount: betterPlayerPreloadController.betterPlayerControllers.length,
         scrollDirection: Axis.vertical,
-        onPageChanged: (int index) {},
+        onPageChanged: (int index) {
+          // final controller = betterPlayerPreloadController.betterPlayerControllers[index];
+          // log('controller: ${controller?.betterPlayerDataSource?.url}');
+          betterPlayerPreloadController.setupDataSource(index);
+          setState(() {});
+        },
         itemBuilder: (context, index) {
-          VideoListData item = dataList[index];
-          return PreloadVideoWidget(
-            index: index,
-            total: dataList.length,
-            videoData: item,
-            // videoListController: videoListController,
+          final controller = betterPlayerPreloadController.betterPlayerControllers[index];
+          return BetterPlayer(
+            controller: controller!,
           );
         },
       ),

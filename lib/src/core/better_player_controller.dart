@@ -28,6 +28,9 @@ class BetterPlayerController {
   ///Playlist configuration used in controller instance.
   final BetterPlayerPlaylistConfiguration? betterPlayerPlaylistConfiguration;
 
+  ///Preload configuration used in controller instance.
+  final BetterPlayerPreloadConfiguration? betterPlayerPreloadConfiguration;
+
   ///List of event listeners, which listen to events.
   final List<Function(BetterPlayerEvent)?> _eventListeners = [];
 
@@ -200,6 +203,7 @@ class BetterPlayerController {
   BetterPlayerController(
     this.betterPlayerConfiguration, {
     this.betterPlayerPlaylistConfiguration,
+    this.betterPlayerPreloadConfiguration,
     BetterPlayerDataSource? betterPlayerDataSource,
   }) {
     this._betterPlayerControlsConfiguration = betterPlayerConfiguration.controlsConfiguration;
