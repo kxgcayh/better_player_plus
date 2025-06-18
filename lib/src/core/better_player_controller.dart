@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:io';
+
 import 'package:better_player_plus/better_player_plus.dart';
 import 'package:better_player_plus/src/configuration/better_player_controller_event.dart';
 import 'package:better_player_plus/src/core/better_player_utils.dart';
@@ -27,9 +28,6 @@ class BetterPlayerController {
 
   ///Playlist configuration used in controller instance.
   final BetterPlayerPlaylistConfiguration? betterPlayerPlaylistConfiguration;
-
-  ///Preload configuration used in controller instance.
-  final BetterPlayerPreloadConfiguration? betterPlayerPreloadConfiguration;
 
   ///List of event listeners, which listen to events.
   final List<Function(BetterPlayerEvent)?> _eventListeners = [];
@@ -203,7 +201,6 @@ class BetterPlayerController {
   BetterPlayerController(
     this.betterPlayerConfiguration, {
     this.betterPlayerPlaylistConfiguration,
-    this.betterPlayerPreloadConfiguration,
     BetterPlayerDataSource? betterPlayerDataSource,
   }) {
     this._betterPlayerControlsConfiguration = betterPlayerConfiguration.controlsConfiguration;
@@ -476,9 +473,8 @@ class BetterPlayerController {
           throw ArgumentError("Couldn't create file from memory.");
         }
         break;
-
-      default:
-        throw UnimplementedError("${betterPlayerDataSource.type} is not implemented");
+      // default:
+      //   throw UnimplementedError("${betterPlayerDataSource.type} is not implemented");
     }
     await _initializeVideo();
   }
